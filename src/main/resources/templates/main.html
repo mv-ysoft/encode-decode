@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Encode-Decode</title>
+    <link rel="stylesheet" type="text/css"
+          href="../css/bootstrap.css" th:href="@{css/bootstrap.css}" />
+</head>
+<body>
+<div class="container">
+    <h1>Encode-Decode</h1>
+<form action="#" th:action="@{/}" th:object="${input}" method="post">
+
+    <div class="form-group">
+        <label for="textInput">Input text</label>
+        <textarea id="textInput"
+                  th:field="*{text}"
+                  th:classappend="${#fields.hasErrors('text')} ? is-invalid"
+                  class="form-control"
+                  rows="15" cols="100" required></textarea>
+        <div class="invalid-feedback">
+            <p th:each="error: ${#fields.errors('text')}" th:text="${error}">Invalid data</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="codecSelect">Codec</label>
+        <select th:field="*{codec}"
+                id="codecSelect"
+                class="form-control" required>
+            <option th:each="codec : ${codecs}"
+                    th:value="${codec}"
+                    th:text="${codec}">Codec</option>
+        </select>
+        <label for="directionSelect">Direction</label>
+        <select th:field="*{direction}"
+                id="directionSelect"
+                class="form-control" required>
+            <option value="ENCODE">Encode</option>
+            <option value="DECODE">Decode</option>
+        </select>
+    </div>
+
+    <div class="form-group"
+         th:if="${output}">
+        <label for="output">Output</label>
+        <textarea th:text="${output}"
+                  id="output"
+                  class="form-control"
+                  rows="15" cols="100"
+                  readonly></textarea>
+    </div>
+
+    <button type="submit"
+            class="btn btn-primary">Process</button>
+
+</form>
+</div>
+</body>
+</html>

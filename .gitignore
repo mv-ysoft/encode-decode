@@ -1,0 +1,9 @@
+build/
+.gradle
+/.idea/libraries
+/.idea/sonarlint
+/.idea/tasks.xml
+/.idea/workspace.xml
+
+
+*.iml
